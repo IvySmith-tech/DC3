@@ -10,3 +10,26 @@ output: html_document
 look at the monitor, date find the corresponding wind speed and wind direction
 3. Map(Sensor+factory)
 4. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rio)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+
+sensordata <- import("Sensor Data.xlsx")
+glimpse(sensordata)
+class(sensordata$Chemical) 
+```
+```{r}
+sort(table(Monitor),decreasing=TRUE)[1:9]
+```
+
+```{r}
+chemical_reading<-sensordata %>% 
+  group_by(Chemical, Reading) %>% 
+  summarize(num() = n()) %>%
+  arrange(desc(chemical_reading))
+```
