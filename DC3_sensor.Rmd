@@ -1,6 +1,6 @@
 ---
 title: "DC3_sensor"
-author: "Ivy Chen"
+author: "Ivy Chen, Salwa Ouachtouki"
 date: "3/19/2021"
 output: html_document
 ---
