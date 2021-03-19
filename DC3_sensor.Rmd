@@ -5,8 +5,9 @@ date: "3/19/2021"
 output: html_document
 ---
 
-1. combine two datasets(join)
+1. combine two dataset(join)
 2. find the highest Readings for each pollutant
 look at the monitor, date find the corresponding wind speed and wind direction
-3. Map(Sensor+factory)
+3. look at the frequency of the monitors
+4. Map(Sensor+factory)
 4. 
