@@ -10,4 +10,40 @@ output: html_document
 look at the monitor, date find the corresponding wind speed and wind direction
 3. look at the frequency of the monitors
 4. Map(Sensor+factory)
-4. 
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rio)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+
+sensordata <- import("Sensor Data.xlsx")
+metedata <- import("Meteorological Data.xlsx")
+glimpse(sensordata)
+class(sensordata$Chemical) 
+```
+```{r}
+sensordata%>%
+  count(Monitor)
+```
+At first, we assume that there might be some abnormal detections among the monitors such as some of them might be intentionally less functioning than the others. However, we discovered that the number of monitor that recorded the pollutants were very similar. All 9 monitors almost work the same. 
+
+```{r}
+chemical_reading<-sensordata %>% 
+  group_by(Chemical,Reading) %>% 
+  summarize(num = n()) %>%
+  arrange(desc(num))
+```
+```{r}
+sensordata[order(-Reading),] 
+```
+
+We can see that the pollutants with the highest reading are mainly AGOC-3A and Methylosmolene. 
+```{r}
+sensordata%>%
+  innner_join()
+```
+
