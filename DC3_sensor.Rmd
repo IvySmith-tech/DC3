@@ -45,7 +45,7 @@ sensor_meta<-sensordata%>%
   inner_join(metedata, by = c("Date Time"="Date"))
 ```
 
-The highest wind speed, 6.8 m/s, has the wind direction towards 303.5. The second highest wind speed is 6.7m/s, with a directions towards 282.3. The  6.3 304.2. The monitors that corresponds to the top three wind speed we had above, which detected the most reading of the pollutants are 3 and 4. We infer that these two monitors can lead us to find the factory that is responsible of polluting the environment.
+The highest wind speed, 6.8 m/s, has the wind direction towards 303.5. The second highest wind speed is 6.7m/s, with a directions towards 282.3. The  6.3 304.2. The monitors that corresponds to the top three strongest wind speed we had above, which detected the most reading of the pollutants are 3 and 4. We infer that these two monitors can lead us to find the factory that is responsible of polluting the environment.
 
 
 ```{r}
