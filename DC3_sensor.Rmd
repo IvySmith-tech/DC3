@@ -44,17 +44,16 @@ ggplot(data = monitor_chemical_reading, aes(x = Monitor, y = n)) +
 chemical_reading <- sensordata %>% 
   group_by(Chemical, Reading) %>% 
   count(Chemical, Reading)
-
 chemical_reading 
 
-chemical_reading.sub1 <- subset(chemical_reading, Reading > 5.0)
+chemical_reading.sub1 <- subset(chemical_reading, Reading > .5)
 chemical_reading.sub1
 
 ggplot(data = chemical_reading.sub1, aes(x = Chemical, y = Reading)) +
-  geom_point(aes(color = n)) + 
-  scale_y_continuous(breaks = seq(0, 101, by = 5)) +
+  geom_point(color = "cornflowerblue") +
+  scale_y_continuous(breaks = seq(0, 101, by = 1)) +
   theme(legend.position = "right") +
   ggtitle("Sensor Data: Chemical Reading") +
-  xlab("Chemical") + ylab("Reading") 
+  xlab("Chemical") + ylab("Reading")
 
 ```
