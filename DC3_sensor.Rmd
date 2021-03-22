@@ -1,15 +1,14 @@
 ---
-title: "DC3_sensor"
+title: "DC3_Sensor"
 author: "Ivy Chen, Salwa Ouachtouki"
 date: "3/19/2021"
 output: html_document
 ---
 
-1. combine two dataset(join)
-2. find the highest Reading for each pollutant
-look at the monitor and date. find the corresponding wind speed and wind direction
-3. look at the frequency of the monitors
-4. Map(Sensor+factory)
+1. combine two datasets(join)
+2. find the highest Readings for each pollutant
+look at the monitor, date find the corresponding wind speed and wind direction
+3. Map(Sensor+factory)
 
 
 ```{r setup, include=FALSE}
@@ -21,52 +20,47 @@ library(ggplot2)
 library(lubridate)
 
 sensordata <- import("Sensor Data.xlsx")
-metedata <- import("Meteorological Data.xlsx")
+meteorologicaldata <- import ("Meteorological Data.xlsx")
+monitor <- (sensordata$Monitor)
+
 glimpse(sensordata)
 class(sensordata$Chemical) 
 ```
 ```{r}
-sensordata%>%
-  count(Monitor)
+monitor_chemical_reading <- sensordata%>%
+  count(Monitor, Chemical)
 ```
-At first, we assume that there might be some abnormal detections among the monitors such as some of them might be intentionally less functioning than the others. However, we discovered that the number of monitor that recorded the pollutants were very similar. All 9 monitors almost work the same. 
 
 ```{r}
-chemical_reading<-sensordata %>% 
-  group_by(Chemical, Reading) %>% 
-  summarize(num = n()) %>%
-  arrange(desc(num))
+ggplot(data = monitor_chemical_reading, aes(x = Monitor, y = n)) +
+  geom_point(aes(color = Chemical)) + 
+  theme(legend.position = "right") +
+  ggtitle("Sensor Data: Monitors & Chemicals") +
+  xlab("Monitor") + ylab("Amount of Chemical") +
+  xlim("1", "2", "3","4","5","6","7","8","9")
 ```
 
-We can see that the pollutants with the highest reading are AGOC-3A and Methylosmolene. They were highly released in April, August and December.
-
-```{r}
-sensor_meta<-sensordata%>%
-  inner_join(metedata, by = c("Date Time"="Date"))
-```
-
+<<<<<<< HEAD
 The highest wind speed, 6.8 m/s, has the wind direction towards 303.5. The second highest wind speed is 6.7m/s, with a directions towards 282.3. The  6.3 304.2. The monitors that corresponds to the top three strongest wind speed we had above, which detected the most reading of the pollutants are 3 and 4. We infer that these two monitors can lead us to find the factory that is responsible of polluting the environment.
 
 
+=======
+>>>>>>> 7e81b1999daa081cf608ba77f198ac4451c75439
 ```{r}
-library(png)
-library(grid)
+chemical_reading <- sensordata %>% 
+  group_by(Chemical, Reading) %>% 
+  count(Chemical, Reading)
 
-d <- data.frame(x=c(89,90,109,120), y= c(27,21,26,22))
+chemical_reading 
 
-r <- png::readPNG('MapLargeLabels.png')
-rg <- grid::rasterGrob(r, width=unit(1,"npc"), height=unit(1,"npc"))
+chemical_reading.sub1 <- subset(chemical_reading, Reading > 5.0)
+chemical_reading.sub1
 
-factories<-ggplot(d, aes(x,y)) + 
-  annotation_custom(rg) +
-  geom_point(colour="red") +
-  scale_x_continuous(expand=c(0,0), lim=c(0,150)) +
-  scale_y_continuous(expand=c(0,0), lim=c(0,150)) +
-  theme_void() +
-  theme(aspect.ratio = nrow(r)/ncol(r)) 
+ggplot(data = chemical_reading.sub1, aes(x = Chemical, y = Reading)) +
+  geom_point(aes(color = n)) + 
+  scale_y_continuous(breaks = seq(0, 101, by = 5)) +
+  theme(legend.position = "right") +
+  ggtitle("Sensor Data: Chemical Reading") +
+  xlab("Chemical") + ylab("Reading") 
 
-factories
 ```
-
-These are the locations of the four factories on the map.
-
