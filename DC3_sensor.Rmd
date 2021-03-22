@@ -40,6 +40,12 @@ ggplot(data = monitor_chemical_reading, aes(x = Monitor, y = n)) +
   xlim("1", "2", "3","4","5","6","7","8","9")
 ```
 
+<<<<<<< HEAD
+The highest wind speed, 6.8 m/s, has the wind direction towards 303.5. The second highest wind speed is 6.7m/s, with a directions towards 282.3. The  6.3 304.2. The monitors that corresponds to the top three strongest wind speed we had above, which detected the most reading of the pollutants are 3 and 4. We infer that these two monitors can lead us to find the factory that is responsible of polluting the environment.
+
+
+=======
+>>>>>>> 7e81b1999daa081cf608ba77f198ac4451c75439
 ```{r}
 chemical_reading <- sensordata %>% 
   group_by(Chemical, Reading) %>% 
