@@ -18,6 +18,7 @@ library(rio)
 library(dplyr)
 library(ggplot2)
 library(lubridate)
+library(readxl)
 
 sensordata <- import("Sensor Data.xlsx")
 meteorologicaldata <- import ("Meteorological Data.xlsx")
