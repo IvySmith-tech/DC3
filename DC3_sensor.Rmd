@@ -38,22 +38,15 @@ fillcolors <- c("#93F4DE", "#F9A75E", "#C4F3BC", "F3BCF3")
 ggplot(data = monitor_chemical_reading, aes(x = Monitor, y = n)) +
   geom_point(aes(shape = Chemical), alpha = 0.5, size = 3) + 
   theme(legend.position = "right") +
-  ggtitle("Sensor Data: Monitors & Chemicals") +
-  xlab("Monitor") + ylab("Amount of Chemical") +
-<<<<<<< HEAD
+  ggtitle("Sensor Data: Total Readings of Each Chemical by Monitor") +
+  xlab("Monitor") + ylab("Total Readings") +
   xlim("1", "2", "3","4","5","6","7","8","9") +
   scale_color_manual(values=linecolors) +
-  scale_fill_manual(values=fillcolors) +
+  scale_fill_manual(values=fillcolors) + 
   theme_bw()
-
 ```
+Here we can see a symmetrical pattern that almost looks like an identical reflection that is being represented by AGOC-3A and Methlosmolene. Applyimonia and Chlorodinine are stagnant throughout all the monitors at 2200 total readings which is an unexpected behavior. From this we can tell that AGOC-3A is the leading chemical across all of the monitors. 
 
-=======
-  xlim("1", "2", "3","4","5","6","7","8","9") + scale_color_manual(values=c("#31a354", "#d95f0e", "#56B4E9", "#756bb1"))
-```
-
-
->>>>>>> 9bde0e17f4a868d385a2c66ada780c32332b2864
 ```{r}
 chemical_reading <- sensordata %>% 
   group_by(Chemical, Reading) %>% 
@@ -66,17 +59,13 @@ chemical_reading.sub1
 ggplot(data = chemical_reading.sub1, aes(x = Chemical, y = Reading)) +
   geom_point(color = "cornflowerblue") +
   scale_y_continuous(breaks = seq(0, 101, by = 1)) +
-  theme(legend.position = "right") +
-  ggtitle("Sensor Data: Chemical Reading") +
-<<<<<<< HEAD
+  ggtitle("Sensor Data: Chemical Reading for Each Chemical") +
   xlab("Chemical") + ylab("Reading") +
-  theme_bw()
-```
-=======
-  xlab("Chemical") + ylab("Reading")
-
+  theme_bw() +
+  theme(axis.text.y = element_text(size=6))
 ```
 
+From this we can see that the highest chemical readins were from AGOC-3A and Methylosmolene and the lowest were from Appluimonia and Chlorodinine. This shows that AGOC-3A and Methylosmolene are most likely the responsible chemicals. 
 
 ```{r}
 sensordata%>%
@@ -119,5 +108,3 @@ factories
 
 These are the locations of the four factories on the map.
 
-
->>>>>>> 9bde0e17f4a868d385a2c66ada780c32332b2864
